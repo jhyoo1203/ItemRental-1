@@ -1,4 +1,6 @@
-package itemrentalmanagement;
+package usermanagement;
+
+import itemrentalmanagement.SystemMain;
 
 import javax.swing.*;
 import java.awt.*;

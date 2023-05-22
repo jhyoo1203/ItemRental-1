@@ -1,3 +1,5 @@
+package itemrentalmanagement;
+
 public class Item {
     private String itemId;
     private String itemName;

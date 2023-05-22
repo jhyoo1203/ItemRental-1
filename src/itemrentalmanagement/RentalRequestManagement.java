@@ -1,3 +1,5 @@
+package itemrentalmanagement;
+
 import javax.swing.*;
 
 public class RentalRequestManagement extends JFrame {

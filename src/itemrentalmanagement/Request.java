@@ -1,3 +1,5 @@
+package itemrentalmanagement;
+
 public class Request {
     private int userId;
     private String itemId;

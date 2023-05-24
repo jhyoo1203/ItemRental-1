@@ -1,7 +1,6 @@
 package usermanagement;
 
 import itemrentalmanagement.SystemMain;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,9 @@ public class Login extends JFrame implements ActionListener {
     private JTextField userTextField;
     private JPasswordField passwordField;
     private JButton loginButton, resetButton;
+    private JPanel idPanel, pwPanel, loginPanel, messagePanel, btnPanel;
     private static final int[] idList = { 1000000, 2000000, 3000000 };
+
 
     public Login() {
         setTitle("물품 대여 시스템 로그인");
@@ -31,28 +32,42 @@ public class Login extends JFrame implements ActionListener {
         loginButton = new JButton("로그인");
         resetButton = new JButton("초기화");
 
-        userLabel.setBounds(50, 30, 100, 30);
-        passwordLabel.setBounds(50, 70, 100, 30);
-        messageLabel.setBounds(150, 110, 200, 30);
+        idPanel = new JPanel();
+        idPanel.add(userLabel);
+        idPanel.add(userTextField);
+        userLabel.setPreferredSize(new Dimension(100, 30));
+        userTextField.setPreferredSize(new Dimension(150, 30));
 
-        userTextField.setBounds(150, 30, 150, 30);
-        passwordField.setBounds(150, 70, 150, 30);
+        pwPanel = new JPanel();
+        pwPanel.add(passwordLabel);
+        pwPanel.add(passwordField);
+        passwordLabel.setPreferredSize(new Dimension(100, 30));
+        passwordField.setPreferredSize(new Dimension(150, 30));
 
-        loginButton.setBounds(50, 150, 100, 30);
-        resetButton.setBounds(200, 150, 100, 30);
+        loginPanel = new JPanel();
+        loginPanel.setLayout(new FlowLayout());
+        loginPanel.setPreferredSize(new Dimension(150, 100));
+        loginPanel.add(idPanel);
+        loginPanel.add(pwPanel);
 
-        add(userLabel);
-        add(passwordLabel);
-        add(messageLabel);
-        add(userTextField);
-        add(passwordField);
-        add(loginButton);
-        add(resetButton);
+
+        messagePanel = new JPanel();
+        messagePanel.add(messageLabel);
+        messageLabel.setPreferredSize(new Dimension(100, 30));
+
+        btnPanel = new JPanel();
+        btnPanel.add(loginButton);
+        btnPanel.add(resetButton);
+        loginButton.setPreferredSize(new Dimension(100, 30));
+        resetButton.setPreferredSize(new Dimension(100, 30));
+
+        add(loginPanel, "North");
+        add(messagePanel, "Center");
+        add(btnPanel, "South");
 
         loginButton.addActionListener(this);
         resetButton.addActionListener(this);
 
-        setLayout(null);
         setVisible(true);
     }
 

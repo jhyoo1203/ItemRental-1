@@ -27,7 +27,7 @@ public class ItemSearch extends JFrame implements ActionListener {
         setSize(1000, 1000);
         setLocationRelativeTo(null);
 
-        ImageIcon cleanerIcon = new ImageIcon(getClass().getResource("./resources/cleaner.png"));
+        ImageIcon cleanerIcon = new ImageIcon(getClass().getResource("../resources/cleaner.png"));
         JLabel cleanerLabel = new JLabel(cleanerIcon);
         cleanerLabel.setBounds(100, 50, 200, 200);
 
@@ -51,7 +51,7 @@ public class ItemSearch extends JFrame implements ActionListener {
         cleanerRentalBtn.setBounds(310, 200, 100, 30);
         cleanerRentalBtn.addActionListener(this);
 
-        ImageIcon batteryIcon = new ImageIcon(getClass().getResource("./resources/battery.png"));
+        ImageIcon batteryIcon = new ImageIcon(getClass().getResource("../resources/battery.png"));
         JLabel batteryLabel = new JLabel(batteryIcon);
         batteryLabel.setBounds(100, 300, 200, 200);
 
@@ -75,7 +75,7 @@ public class ItemSearch extends JFrame implements ActionListener {
         batteryRentalBtn.setBounds(310, 450, 100, 30);
         batteryRentalBtn.addActionListener(this);
 
-        ImageIcon monitorIcon = new ImageIcon(getClass().getResource("./resources/monitor.png"));
+        ImageIcon monitorIcon = new ImageIcon(getClass().getResource("../resources/monitor.png"));
         JLabel monitorLabel = new JLabel(monitorIcon);
         monitorLabel.setBounds(100, 550, 200, 200);
 

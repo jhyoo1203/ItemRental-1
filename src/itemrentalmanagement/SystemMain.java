@@ -3,6 +3,9 @@ package itemrentalmanagement;
 import usermanagement.Login;
 
 import javax.swing.*;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +13,7 @@ public class SystemMain extends JFrame implements ActionListener {
     private int id;
     private String password;
     private JButton intermediaryBtn, consumerBtn, providerBtn, retryBtn;
+    private JPanel btnPanel, retryPanel, blankPanel;
 
     // showSystemMain() 대체
     public SystemMain(int id, String password) {
@@ -26,22 +30,40 @@ public class SystemMain extends JFrame implements ActionListener {
         providerBtn = new JButton("제공자");
         retryBtn = new JButton("로그아웃");
 
-        intermediaryBtn.setBounds(150, 30, 100, 30);
-        consumerBtn.setBounds(150, 70, 100, 30);
-        providerBtn.setBounds(150, 110, 100, 30);
-        retryBtn.setBounds(150, 150, 100, 30);
+        btnPanel = new JPanel();
+        // hgap = x margin, vgap = y margin
+        btnPanel.setLayout(new FlowLayout(1, 20, 0));
+        btnPanel.setPreferredSize(new Dimension(100, 150));
+        intermediaryBtn.setPreferredSize(new Dimension(100, 30));
+        consumerBtn.setPreferredSize(new Dimension(100, 30));
+        providerBtn.setPreferredSize(new Dimension(100, 30));
+        
+        btnPanel.add(intermediaryBtn);
+        btnPanel.add(consumerBtn);
+        btnPanel.add(providerBtn);
+        
+        retryPanel = new JPanel();
+        retryPanel.add(retryBtn);
+        retryBtn.setPreferredSize(new Dimension(100, 30));
 
-        add(intermediaryBtn);
-        add(consumerBtn);
-        add(providerBtn);
-        add(retryBtn);
+        blankPanel = new JPanel();
+        blankPanel.setPreferredSize(new Dimension(1, 100));
 
+        
+        // intermediaryBtn.setBounds(150, 30, 100, 30);
+        // consumerBtn.setBounds(150, 70, 100, 30);
+        // providerBtn.setBounds(150, 110, 100, 30);
+        // retryBtn.setBounds(150, 150, 100, 30);
+        
         intermediaryBtn.addActionListener(this);
         consumerBtn.addActionListener(this);
         providerBtn.addActionListener(this);
         retryBtn.addActionListener(this);
 
-        setLayout(null);
+        add(blankPanel, "North");
+        add(btnPanel, "Center");
+        add(retryPanel, "South");
+
         setVisible(true);
     }
 

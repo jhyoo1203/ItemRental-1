@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Login extends JFrame implements ActionListener {
+public class LoginManagement extends JFrame implements ActionListener {
 
     private JLabel userLabel, passwordLabel, messageLabel;
     private JTextField userTextField;
@@ -16,7 +16,7 @@ public class Login extends JFrame implements ActionListener {
     private static final int[] idList = { 1000000, 2000000, 3000000 };
 
 
-    public Login() {
+    public LoginManagement() {
         setTitle("물품 대여 시스템 로그인");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -102,6 +102,6 @@ public class Login extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Login();
+        new LoginManagement();
     }
 }

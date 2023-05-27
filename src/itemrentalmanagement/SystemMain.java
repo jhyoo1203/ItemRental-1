@@ -1,6 +1,6 @@
 package itemrentalmanagement;
 
-import usermanagement.Login;
+import usermanagement.LoginManagement;
 
 import javax.swing.*;
 
@@ -102,7 +102,7 @@ public class SystemMain extends JFrame implements ActionListener {
 
             if(choice == 0){
                 dispose();
-                new Login();
+                new LoginManagement();
             }
 
         }

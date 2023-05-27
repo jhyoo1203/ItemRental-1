@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class LoginManagement extends JFrame implements ActionListener {
 
@@ -13,6 +14,7 @@ public class LoginManagement extends JFrame implements ActionListener {
     private JPasswordField passwordField;
     private JButton loginButton, resetButton, signUpButton;
     private JPanel idPanel, pwPanel, loginPanel, messagePanel, btnPanel;
+    private ArrayList<User> userList = new ArrayList<>();
     private static final int[] idList = { 1000000, 2000000, 3000000 };
 
 
@@ -70,6 +72,7 @@ public class LoginManagement extends JFrame implements ActionListener {
 
         loginButton.addActionListener(this);
         resetButton.addActionListener(this);
+        signUpButton.addActionListener(this);
 
         setVisible(true);
     }
@@ -103,7 +106,31 @@ public class LoginManagement extends JFrame implements ActionListener {
         }
         else if(e.getSource() == signUpButton)
         {
+            User user;
 
+            JFrame signUp = new JFrame();
+            JPanel mainPanel = new JPanel();
+
+            signUp.setTitle("회원가입");
+            signUp.setSize(400, 300);
+            signUp.setLocationRelativeTo(null);
+            signUp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+            JPanel checkPanel = new JPanel();
+            JCheckBox consumerCheckBox = new JCheckBox("소비자");
+            JCheckBox providerCheckBox = new JCheckBox("제공자");
+            consumerCheckBox.setPreferredSize(new Dimension(100, 30));
+            providerCheckBox.setPreferredSize(new Dimension(100, 30));
+            checkPanel.add(consumerCheckBox);
+            checkPanel.add(providerCheckBox);
+            mainPanel.add(checkPanel);
+
+            JPanel namePanel, idPanel, passwordPanel, agePanel, genderPanel, phoneNumberPanel;
+            JLabel nameLabel, idLabel, passwordLabel, ageLabel, genderLabel, phoneNumberLabel;
+
+            signUp.add(mainPanel);
+            signUp.setVisible(true);
         }
     }
 
@@ -112,10 +139,5 @@ public class LoginManagement extends JFrame implements ActionListener {
             if(i == id) return true;
         }
         return false;
-    }
-
-
-    public static void main(String[] args) {
-        new LoginManagement();
     }
 }

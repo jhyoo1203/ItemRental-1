@@ -12,12 +12,7 @@ public class User {
     private String gender;
     private String phoneNumber;
 
-    public User(int select){
-        switch(userClassifies[select - 1]){
-            case "CONSUMER":
-                signUpConsumer();
-            case "PROVIDER":
+    public User(){
 
-        }
     }
 }

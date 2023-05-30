@@ -28,7 +28,7 @@ public class Join {
 
         // User의 각 필드 값으로 넣을 Panel 추가
         JPanel namePanel, idPanel, passwordPanel, passwordConfirmPanel, agePanel, genderPanel, phoneNumberPanel, signUpConfirmPanel;
-        JLabel nameLabel, idLabel, passwordLabel, passwordConfirmLabel, ageLabel, genderLabel, phoneNumberLabel, messageLabel;
+        JLabel nameLabel, idLabel, passwordLabel, passwordConfirmLabel, ageLabel, genderLabel, phoneNumberLabel, messageLabel, idConfirmMessageLabel;
         JTextField nameTextField, idTextField, ageTextField, phoneNumberTextField;
         JPasswordField passwordField, passwordConfirmField;
         JButton idConfirmButton, signUpConfirmButton;
@@ -99,12 +99,15 @@ public class Join {
         idLabel = new JLabel("ID : ");
         idTextField = new JTextField(10);
         idConfirmButton = new JButton("중복확인");
+        idConfirmMessageLabel = new JLabel();
         idLabel.setPreferredSize(new Dimension(100, 30));
         idTextField.setPreferredSize(new Dimension(100, 30));
         idConfirmButton.setPreferredSize(new Dimension(100, 30));
+        idConfirmMessageLabel.setPreferredSize(new Dimension(200, 30));
         idPanel.add(idLabel);
         idPanel.add(idTextField);
         idPanel.add(idConfirmButton);
+        idPanel.add(idConfirmMessageLabel);
         idPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainPanel.add(idPanel);
 
@@ -196,6 +199,19 @@ public class Join {
             boolean providerSelected = providerCheckBox.isSelected();
             boolean maleSelected = maleCheckBox.isSelected();
             boolean femaleSelected = femaleCheckBox.isSelected();
+
+            // 소비자를 선택했을 경우, 자동으로 맨 앞에 '2'를 추가함.
+            if(consumerSelected){
+                idTextField.setText("2");
+                idConfirmMessageLabel.setForeground(Color.RED);
+                idConfirmMessageLabel.setText("ID가 '2'로 시작해야 합니다.");
+            }
+            // 제공자를 선택했을 경우, 자동으로 맨 앞에 '3'을 추가함.
+            else if(providerSelected){
+                idTextField.setText("3");
+                idConfirmMessageLabel.setForeground(Color.RED);
+                idConfirmMessageLabel.setText("ID가 '3'으로 시작해야 합니다.");
+            }
 
             consumerCheckBox.setEnabled(!providerSelected);
             providerCheckBox.setEnabled(!consumerSelected);

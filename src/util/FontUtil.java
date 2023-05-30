@@ -47,4 +47,12 @@ public class FontUtil {
         Font font = new Font(Font.DIALOG, Font.PLAIN, 12);
         setUIFont(font);
     }
+
+    public static void loadFont(){
+        String fontName = "맑은 고딕"; // 원하는 폰트 이름으로 변경
+        int fontStyle = Font.PLAIN; // 폰트 스타일 설정
+        int fontSize = 12; // 폰트 크기 설정
+
+        FontUtil.setUIFont(fontName, fontStyle, fontSize);
+    }
 }

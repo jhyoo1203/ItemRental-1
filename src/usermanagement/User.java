@@ -50,14 +50,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "classify='" + classify + '\'' +
-                ", id=" + id +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return String.format(classify + "," + id + "," + password + "," + name + "," + age + "," + gender + "," + phoneNumber);
     }
 }

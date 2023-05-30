@@ -244,5 +244,6 @@ public class Join {
 
         user = new User(classify, id, password, name, age, gender, phoneNumber);
         LoginManagement.userList.add(user);
+        LoginManagement.writeUserData(user);
     }
 }

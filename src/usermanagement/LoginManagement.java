@@ -5,6 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LoginManagement extends JFrame implements ActionListener {
@@ -119,5 +123,21 @@ public class LoginManagement extends JFrame implements ActionListener {
             if(i == id) return true;
         }
         return false;
+    }
+
+    public static void writeUserData(final User user) {
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter("../resources/userList.txt"));
+            bw.write(user.toString());
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void loadUserList(){
+
     }
 }

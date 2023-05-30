@@ -3,16 +3,11 @@ package usermanagement;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
@@ -20,18 +15,6 @@ import javax.swing.text.DocumentFilter;
 
 public class Join {
     public Join() {
-        // 회원가입 할 User
-        User user;
-
-        // User의 정보
-        String classify;
-        int id;
-        String password;
-        String name;
-        int age;
-        String gender;
-        String phoneNumber;
-
         JFrame signUp = new JFrame();
         JPanel mainPanel = new JPanel();
 
@@ -102,7 +85,7 @@ public class Join {
         phoneNumberPanel.add(phoneNumberLabel);
         phoneNumberPanel.add(phoneNumberTextField);
         phoneNumberPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        mainPanel.add(agePanel);
+        mainPanel.add(phoneNumberPanel);
 
         idPanel = new JPanel();
         idLabel = new JLabel("ID : ");
@@ -233,17 +216,34 @@ public class Join {
         maleCheckBox.addItemListener(checkBoxItemListener);
         femaleCheckBox.addItemListener(checkBoxItemListener);
 
-        // 회원가입 정보 저장
-        classify = consumerCheckBox.isSelected() ? "소비자" : "제공자";
-        id = Integer.parseInt(idTextField.getText());
-        password = new String(passwordField.getPassword());
-        name = nameTextField.getText();
-        age = Integer.parseInt(ageTextField.getText());
-        gender = maleCheckBox.isSelected() ? "남자" : "여자";
-        phoneNumber = phoneNumberTextField.getText();
+        idConfirmButton.addActionListener(e -> {
+            if(LoginManagement.searchUserId(Integer.parseInt(idTextField.getText()))){
+                JOptionPane.showMessageDialog(null, "사용 가능한 아이디입니다.", "확인", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "중복된 아이디입니다.", "에러", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
-        user = new User(classify, id, password, name, age, gender, phoneNumber);
-        LoginManagement.userList.add(user);
-        LoginManagement.writeUserData(user);
+        signUpConfirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == signUpConfirmButton) {
+                    String classify = consumerCheckBox.isSelected() ? "소비자" : "제공자";
+                    int id = Integer.parseInt(idTextField.getText());
+                    String password = new String(passwordField.getPassword());
+                    String name = nameTextField.getText();
+                    int age = Integer.parseInt(ageTextField.getText());
+                    String gender = maleCheckBox.isSelected() ? "남자" : "여자";
+                    String phoneNumber = phoneNumberTextField.getText();
+
+                    User user = new User(classify, id, password, name, age, gender, phoneNumber);
+                    LoginManagement.userList.add(user);
+                    LoginManagement.writeUserData(user);
+
+                    JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "확인", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
     }
 }

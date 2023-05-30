@@ -22,11 +22,9 @@ public class LoginManagement extends JFrame implements ActionListener {
     // 회원가입한 User 삽입 예정. -> Join에서 받아 .txt 파일로 관리
     public static ArrayList<User> userList = new ArrayList<>();
 
-    // 삭제 예정
-    private static final int[] idList = { 1000000, 2000000, 3000000 };
-
-
     public LoginManagement() {
+        userList = loadUserList();
+
         setTitle("물품 대여 시스템 로그인");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -92,7 +90,7 @@ public class LoginManagement extends JFrame implements ActionListener {
             int id = Integer.parseInt(userTextField.getText());
             String password = new String(passwordField.getPassword());
 
-            if (isValidId(idList, id) && password.equals("0000"))
+            if (searchUserId(id) && password.equals("0000"))
             {
                 messageLabel.setForeground(Color.BLUE);
                 messageLabel.setText("로그인 성공");
@@ -125,19 +123,28 @@ public class LoginManagement extends JFrame implements ActionListener {
         return false;
     }
 
-    public static void writeUserData(final User user) {
+    public static void writeUserData(User user) {
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new FileWriter("../resources/userList.txt"));
+            bw = new BufferedWriter(new FileWriter("src/resources/userList.txt", true));
             bw.write(user.toString());
             bw.newLine();
             bw.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void loadUserList(){
+    public static ArrayList<User> loadUserList(){
 
+    }
+
+    public static boolean searchUserId(int id) {
+        for(User user : userList){
+            if(user.getId() == id)
+                return false;
+        }
+        return true;
     }
 }

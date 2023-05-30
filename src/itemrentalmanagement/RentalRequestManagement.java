@@ -3,7 +3,7 @@ package itemrentalmanagement;
 import javax.swing.*;
 
 public class RentalRequestManagement extends JFrame {
-
+    private static RentalRequestManagement rentalRequestManagement = new RentalRequestManagement();
     private static Request request = null;
 
     public static void showRentalRequest(){
@@ -44,5 +44,9 @@ public class RentalRequestManagement extends JFrame {
 
     public void rentalRequest(Request request){
         RentalRequestManagement.request = request;
+    }
+
+    public static RentalRequestManagement getInstance(){
+        return rentalRequestManagement;
     }
 }

@@ -15,6 +15,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
 
 public class Join {
     public Join() {
@@ -105,6 +107,26 @@ public class Join {
         idPanel.add(idConfirmButton);
         idPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainPanel.add(idPanel);
+
+        // ID 값 8글자로 제한
+        AbstractDocument idDocument = (AbstractDocument) idTextField.getDocument();
+        idDocument.setDocumentFilter(new DocumentFilter() {
+            private int maxCharacters = 8;
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+                int currentLength = fb.getDocument().getLength();
+                int overLimit = (currentLength + text.length()) - maxCharacters - length;
+
+                if (overLimit > 0) {
+                    text = text.substring(0, text.length() - overLimit);
+                }
+
+                if (text.length() > 0) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
 
         passwordPanel = new JPanel();
         passwordLabel = new JLabel("비밀번호 : ");

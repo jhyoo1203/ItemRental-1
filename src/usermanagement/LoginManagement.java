@@ -15,8 +15,8 @@ public class LoginManagement extends JFrame implements ActionListener {
     private JButton loginButton, resetButton, signUpButton;
     private JPanel idPanel, pwPanel, loginPanel, messagePanel, btnPanel;
 
-    // 회원가입한 User 삽입 예정. -> .txt 파일로 관리
-    private ArrayList<User> userList = new ArrayList<>();
+    // 회원가입한 User 삽입 예정. -> Join에서 받아 .txt 파일로 관리
+    public static ArrayList<User> userList = new ArrayList<>();
 
     // 삭제 예정
     private static final int[] idList = { 1000000, 2000000, 3000000 };

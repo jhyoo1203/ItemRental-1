@@ -23,6 +23,15 @@ public class Join {
         // 회원가입 할 User
         User user;
 
+        // User의 정보
+        String classify;
+        int id;
+        String password;
+        String name;
+        int age;
+        String gender;
+        String phoneNumber;
+
         JFrame signUp = new JFrame();
         JPanel mainPanel = new JPanel();
 
@@ -223,5 +232,17 @@ public class Join {
         providerCheckBox.addItemListener(checkBoxItemListener);
         maleCheckBox.addItemListener(checkBoxItemListener);
         femaleCheckBox.addItemListener(checkBoxItemListener);
+
+        // 회원가입 정보 저장
+        classify = consumerCheckBox.isSelected() ? "소비자" : "제공자";
+        id = Integer.parseInt(idTextField.getText());
+        password = new String(passwordField.getPassword());
+        name = nameTextField.getText();
+        age = Integer.parseInt(ageTextField.getText());
+        gender = maleCheckBox.isSelected() ? "남자" : "여자";
+        phoneNumber = phoneNumberTextField.getText();
+
+        user = new User(classify, id, password, name, age, gender, phoneNumber);
+        LoginManagement.userList.add(user);
     }
 }

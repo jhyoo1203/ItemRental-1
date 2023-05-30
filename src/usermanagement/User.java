@@ -9,7 +9,55 @@ public class User {
     private String gender;
     private String phoneNumber;
 
-    public User(){
+    public User(String classify, int id, String password, String name,
+                int age, String gender, String phoneNumber){
+        this.classify = classify;
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+    }
 
+    public String getClassify() {
+        return classify;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "classify='" + classify + '\'' +
+                ", id=" + id +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

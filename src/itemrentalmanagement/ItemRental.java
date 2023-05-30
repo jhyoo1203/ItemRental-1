@@ -16,7 +16,7 @@ public class ItemRental extends JFrame {
         rentalBtn.addActionListener(e -> {
             int userId = Integer.parseInt(Objects.requireNonNull(JOptionPane.showInputDialog("사용자 ID를 입력하세요.")));
 
-            if(!LoginManagement.searchUserId(userId))
+            if(LoginManagement.searchUser(userId) == null)
                 JOptionPane.showMessageDialog(null, "잘못된 ID 값입니다.", "에러", JOptionPane.ERROR_MESSAGE);
 
             String itemId = JOptionPane.showInputDialog("물품 ID를 입력하세요.");

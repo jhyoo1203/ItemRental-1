@@ -217,7 +217,8 @@ public class Join {
         femaleCheckBox.addItemListener(checkBoxItemListener);
 
         idConfirmButton.addActionListener(e -> {
-            if(LoginManagement.searchUserId(Integer.parseInt(idTextField.getText()))){
+            User user = LoginManagement.searchUser(Integer.parseInt(idTextField.getText()));
+            if(user == null){
                 JOptionPane.showMessageDialog(null, "사용 가능한 아이디입니다.", "확인", JOptionPane.PLAIN_MESSAGE);
             }
             else{

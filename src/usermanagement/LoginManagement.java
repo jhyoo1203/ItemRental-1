@@ -5,11 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class LoginManagement extends JFrame implements ActionListener {
 
@@ -23,7 +21,7 @@ public class LoginManagement extends JFrame implements ActionListener {
     public static ArrayList<User> userList = new ArrayList<>();
 
     public LoginManagement() {
-        userList = loadUserList();
+        loadUserList();
 
         setTitle("물품 대여 시스템 로그인");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,17 +83,15 @@ public class LoginManagement extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton)
+        User user;
+        if ((e.getSource() == loginButton) && (user = searchUser(Integer.parseInt(userTextField.getText()))) != null)
         {
-            int id = Integer.parseInt(userTextField.getText());
-            String password = new String(passwordField.getPassword());
-
-            if (searchUserId(id) && password.equals("0000"))
+            if (user.getPassword().equals(new String(passwordField.getPassword())))
             {
                 messageLabel.setForeground(Color.BLUE);
                 messageLabel.setText("로그인 성공");
                 dispose();
-                new SystemMain(id, password);
+                new SystemMain(user);
             }
             else
             {
@@ -116,13 +112,6 @@ public class LoginManagement extends JFrame implements ActionListener {
         }
     }
 
-    public boolean isValidId(int[] idList, int id){
-        for(int i : idList){
-            if(i == id) return true;
-        }
-        return false;
-    }
-
     public static void writeUserData(User user) {
         BufferedWriter bw = null;
         try {
@@ -136,15 +125,36 @@ public class LoginManagement extends JFrame implements ActionListener {
         }
     }
 
-    public static ArrayList<User> loadUserList(){
+    public static void loadUserList(){
+        BufferedReader br = null;
+        String data = null;
+        StringTokenizer st = null;
+        try {
+            br = new BufferedReader(new FileReader("src/resources/userList.txt"));
+            while((data = br.readLine()) != null){
+                st = new StringTokenizer(data, ",");
 
+                String classify = st.nextToken();
+                int id = Integer.parseInt(st.nextToken());
+                String password = st.nextToken();
+                String name = st.nextToken();
+                int age = Integer.parseInt(st.nextToken());
+                String gender = st.nextToken();
+                String phoneNumber = st.nextToken();
+
+                userList.add(new User(classify, id, password, name, age, gender, phoneNumber));
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static boolean searchUserId(int id) {
+    public static User searchUser(int id) {
         for(User user : userList){
             if(user.getId() == id)
-                return false;
+                return user;
         }
-        return true;
+        return null;
     }
 }

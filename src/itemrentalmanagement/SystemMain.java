@@ -1,6 +1,7 @@
 package itemrentalmanagement;
 
 import usermanagement.LoginManagement;
+import usermanagement.User;
 
 import javax.swing.*;
 
@@ -10,15 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SystemMain extends JFrame implements ActionListener {
-    private int id;
-    private String password;
+    private User user;
     private JButton intermediaryBtn, consumerBtn, providerBtn, retryBtn;
     private JPanel btnPanel, retryPanel, blankPanel;
 
     // showSystemMain() 대체
-    public SystemMain(int id, String password) {
-        this.id = id;
-        this.password = password;
+    public SystemMain(User user) {
+        this.user = user;
 
         setTitle("시스템 메인 화면");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,7 +69,7 @@ public class SystemMain extends JFrame implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e){
         if(e.getSource() == intermediaryBtn){
-            if(id >= 1000000 && id < 2000000){
+            if(user.getId() >= 10000000 && user.getId() < 20000000){
                 showIntermediaryScreen();
             }
             else{
@@ -78,7 +77,7 @@ public class SystemMain extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == consumerBtn){
-            if(id >= 2000000 && id < 3000000){
+            if(user.getId() >= 20000000 && user.getId() < 30000000){
                 showConsumerScreen();
             }
             else{
@@ -86,7 +85,7 @@ public class SystemMain extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == providerBtn){
-            if(id >= 3000000){
+            if(user.getId() >= 30000000){
                 showProviderScreen();
             }
             else{
@@ -172,7 +171,4 @@ public class SystemMain extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-    public int getId() {
-        return id;
-    }
 }

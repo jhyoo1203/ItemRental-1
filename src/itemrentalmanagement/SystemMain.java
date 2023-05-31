@@ -2,7 +2,7 @@ package itemrentalmanagement;
 
 import usermanagement.LoginManagement;
 import usermanagement.User;
-import usermanagement.updateUsers;
+import usermanagement.UpdateUsers;
 
 import javax.swing.*;
 
@@ -98,7 +98,7 @@ public class SystemMain extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == updateBtn){
-            new updateUsers(userId);
+            new UpdateUsers(userId);
         }
         else{
             int choice = JOptionPane.showOptionDialog(null,

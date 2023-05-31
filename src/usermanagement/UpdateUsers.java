@@ -8,10 +8,10 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class updateUsers {
+public class UpdateUsers {
     private User user;
 
-    public updateUsers(int userId) {
+    public UpdateUsers(int userId) {
         JFrame update = new JFrame();
         JPanel mainPanel = new JPanel();
 

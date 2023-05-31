@@ -2,6 +2,7 @@ package itemrentalmanagement;
 
 import usermanagement.LoginManagement;
 import usermanagement.User;
+import usermanagement.updateUsers;
 
 import javax.swing.*;
 
@@ -12,8 +13,8 @@ import java.awt.event.ActionListener;
 
 public class SystemMain extends JFrame implements ActionListener {
     private User user;
-    private JButton intermediaryBtn, consumerBtn, providerBtn, retryBtn;
-    private JPanel btnPanel, retryPanel, blankPanel;
+    private JButton intermediaryBtn, consumerBtn, providerBtn, logoutBtn, updateBtn;
+    private JPanel btnPanel, userPanel, blankPanel;
 
     // showSystemMain() 대체
     public SystemMain(User user) {
@@ -27,7 +28,8 @@ public class SystemMain extends JFrame implements ActionListener {
         intermediaryBtn = new JButton("중개자");
         consumerBtn = new JButton("소비자");
         providerBtn = new JButton("제공자");
-        retryBtn = new JButton("로그아웃");
+        updateBtn = new JButton("회원 정보 수정");
+        logoutBtn = new JButton("로그아웃");
 
         btnPanel = new JPanel();
         // hgap = x margin, vgap = y margin
@@ -41,9 +43,11 @@ public class SystemMain extends JFrame implements ActionListener {
         btnPanel.add(consumerBtn);
         btnPanel.add(providerBtn);
         
-        retryPanel = new JPanel();
-        retryPanel.add(retryBtn);
-        retryBtn.setPreferredSize(new Dimension(100, 30));
+        userPanel = new JPanel();
+        userPanel.setLayout(new FlowLayout(1, 20, 0));
+        userPanel.add(updateBtn);
+        userPanel.add(logoutBtn);
+        logoutBtn.setPreferredSize(new Dimension(100, 30));
 
         blankPanel = new JPanel();
         blankPanel.setPreferredSize(new Dimension(1, 100));
@@ -51,24 +55,26 @@ public class SystemMain extends JFrame implements ActionListener {
         // intermediaryBtn.setBounds(150, 30, 100, 30);
         // consumerBtn.setBounds(150, 70, 100, 30);
         // providerBtn.setBounds(150, 110, 100, 30);
-        // retryBtn.setBounds(150, 150, 100, 30);
+        // logoutBtn.setBounds(150, 150, 100, 30);
         
         intermediaryBtn.addActionListener(this);
         consumerBtn.addActionListener(this);
         providerBtn.addActionListener(this);
-        retryBtn.addActionListener(this);
+        updateBtn.addActionListener(this);
+        logoutBtn.addActionListener(this);
 
         add(blankPanel, "North");
         add(btnPanel, "Center");
-        add(retryPanel, "South");
+        add(userPanel, "South");
 
         setVisible(true);
     }
 
     @Override
     public void actionPerformed (ActionEvent e){
+        int userId = user.getId();
         if(e.getSource() == intermediaryBtn){
-            if(user.getId() == 10000000){
+            if(userId == 10000000){
                 showIntermediaryScreen();
             }
             else{
@@ -76,7 +82,7 @@ public class SystemMain extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == consumerBtn){
-            if(user.getId() >= 20000000 && user.getId() < 30000000){
+            if(userId >= 20000000 && user.getId() < 30000000){
                 showConsumerScreen();
             }
             else{
@@ -84,12 +90,15 @@ public class SystemMain extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == providerBtn){
-            if(user.getId() >= 30000000){
+            if(userId >= 30000000){
                 showProviderScreen();
             }
             else{
                 JOptionPane.showMessageDialog(null, "자격이 유효하지 않습니다.", "에러", JOptionPane.ERROR_MESSAGE);
             }
+        }
+        else if(e.getSource() == updateBtn){
+            new updateUsers(userId);
         }
         else{
             int choice = JOptionPane.showOptionDialog(null,

@@ -86,8 +86,14 @@ public class LoginManagement extends JFrame implements ActionListener {
 
         if (e.getSource() == loginButton){
             User user = searchUser(Integer.parseInt(userTextField.getText()));
+            String pw = "";
+            char[] secret_pw = passwordField.getPassword();
+            for(char ch: secret_pw) {
+                Character.toString(ch);
+                pw += (pw.equals("")) ? ""+ch+"" : ""+ch+"";
+            }
 
-            if(user != null){
+            if(user != null && pw.equals(user.getPassword())){
                 messageLabel.setForeground(Color.BLUE);
                 messageLabel.setText("로그인 성공");
                 dispose();
@@ -143,6 +149,7 @@ public class LoginManagement extends JFrame implements ActionListener {
 
                 userList.add(new User(classify, id, password, name, age, gender, phoneNumber));
             }
+            br.close();
         }
         catch (IOException e) {
             throw new RuntimeException(e);

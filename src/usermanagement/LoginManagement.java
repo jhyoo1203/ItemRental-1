@@ -83,19 +83,18 @@ public class LoginManagement extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        User user;
-        if ((e.getSource() == loginButton) && (user = searchUser(Integer.parseInt(userTextField.getText()))) != null)
-        {
-            if (user.getPassword().equals(new String(passwordField.getPassword())))
-            {
+
+        if (e.getSource() == loginButton){
+            User user = searchUser(Integer.parseInt(userTextField.getText()));
+
+            if(user != null){
                 messageLabel.setForeground(Color.BLUE);
                 messageLabel.setText("로그인 성공");
                 dispose();
                 new SystemMain(user);
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "잘못된 ID 값입니다.", "에러", JOptionPane.ERROR_MESSAGE);
+            else {
+                JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 확인하세요.", "에러", JOptionPane.ERROR_MESSAGE);
                 messageLabel.setForeground(Color.RED);
                 messageLabel.setText("다시 시도하세요.");
             }
@@ -156,5 +155,9 @@ public class LoginManagement extends JFrame implements ActionListener {
                 return user;
         }
         return null;
+    }
+
+    public static void showUserList(){
+
     }
 }

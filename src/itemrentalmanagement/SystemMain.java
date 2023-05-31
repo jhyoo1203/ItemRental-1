@@ -48,7 +48,6 @@ public class SystemMain extends JFrame implements ActionListener {
         blankPanel = new JPanel();
         blankPanel.setPreferredSize(new Dimension(1, 100));
 
-        
         // intermediaryBtn.setBounds(150, 30, 100, 30);
         // consumerBtn.setBounds(150, 70, 100, 30);
         // providerBtn.setBounds(150, 110, 100, 30);
@@ -69,7 +68,7 @@ public class SystemMain extends JFrame implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e){
         if(e.getSource() == intermediaryBtn){
-            if(user.getId() >= 10000000 && user.getId() < 20000000){
+            if(user.getId() == 10000000){
                 showIntermediaryScreen();
             }
             else{

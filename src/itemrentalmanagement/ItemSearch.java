@@ -12,13 +12,13 @@ public class ItemSearch extends JFrame implements ActionListener {
 
     static {
         cleaner = new Item("001", "청소기", 20230520, true,
-                20230508, "가전제품", 20000, 0);
+                20230628, "가전제품", 20000, 0);
 
         battery = new Item("002", "보조 배터리", 20230531, true,
-                20230505, "전자제품", 3000, 0);
+                20241225, "전자제품", 3000, 0);
 
         monitor = new Item("003", "모니터", 20231225, true,
-                20230422, "전자제품", 50000, 0);
+                20240302, "전자제품", 50000, 0);
     }
 
     public ItemSearch(){
@@ -142,7 +142,6 @@ public class ItemSearch extends JFrame implements ActionListener {
             JLabel categoryLabel = new JLabel(cleaner.getCategory());
             JLabel priceLabel = new JLabel(cleaner.getPrice());
             JLabel qScoreLabel = new JLabel(cleaner.getqScore());
-
 
             idLabel.setBounds(50, 10, 250, 30);
             nameLabel.setBounds(50, 40, 250, 30);

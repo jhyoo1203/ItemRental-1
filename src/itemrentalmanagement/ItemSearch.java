@@ -165,9 +165,9 @@ public class ItemSearch extends JFrame implements ActionListener {
             cleanerFrame.setVisible(true);
         }
         else if(e.getSource() == cleanerRentalBtn){
+            new ItemRental();
             cleaner.setAvailableItem(false);
             cleaner.qScoreUp();
-            new ItemRental();
         }
         else if(e.getSource() == batteryBtn){
             JFrame batteryFrame = new JFrame();
@@ -208,9 +208,9 @@ public class ItemSearch extends JFrame implements ActionListener {
             batteryFrame.setVisible(true);
         }
         else if(e.getSource() == batteryRentalBtn){
+            new ItemRental();
             battery.setAvailableItem(false);
             battery.qScoreUp();
-            new ItemRental();
         }
         else if(e.getSource() == monitorBtn){
             JFrame monitorFrame = new JFrame();
@@ -251,9 +251,9 @@ public class ItemSearch extends JFrame implements ActionListener {
             monitorFrame.setVisible(true);
         }
         else if(e.getSource() == monitorRentalBtn){
+            new ItemRental();
             monitor.setAvailableItem(false);
             monitor.qScoreUp();
-            new ItemRental();
         }
     }
 }

@@ -166,13 +166,28 @@ public class SystemMain extends JFrame implements ActionListener {
         frame.setLocationRelativeTo(null);
 
         JButton rentalRequestManagementBtn = new JButton("대여신청 관리");
-        rentalRequestManagementBtn.setBounds(120, 125, 150, 50);
+        rentalRequestManagementBtn.setBounds(120, 50, 150, 50);
+
+        JButton userListSearchBtn = new JButton("사용자 목록 조회");
+        userListSearchBtn.setBounds(120, 100, 150, 50);
+
+        JButton userAccountManagementBtn = new JButton("사용자 계정 관리");
+        userAccountManagementBtn.setBounds(120, 150, 150, 50);
 
         frame.add(rentalRequestManagementBtn);
+        frame.add(userListSearchBtn);
+        frame.add(userAccountManagementBtn);
 
         rentalRequestManagementBtn.addActionListener(e -> {
-            frame.dispose();
             RentalRequestManagement.showRentalRequest();
+        });
+
+        userListSearchBtn.addActionListener(e -> {
+            LoginManagement.showUserList();
+        });
+
+        userAccountManagementBtn.addActionListener(e -> {
+            LoginManagement.userAccountManagement();
         });
 
         frame.setLayout(null);

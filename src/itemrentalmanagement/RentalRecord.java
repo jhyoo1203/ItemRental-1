@@ -7,7 +7,7 @@ public class RentalRecord {
 
     private String itemId;
     private int userId;
-    private final int rentalDate = 20230508;
+    private final int rentalDate = 20230601;
     private int returnDate;
 
 

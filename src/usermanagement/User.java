@@ -24,6 +24,10 @@ public class User {
         this.id = 10000000;
     }
 
+    public void deleteAccount(){
+        LoginManagement.userList.remove(this);
+    }
+
     public String getClassify() {
         return classify;
     }

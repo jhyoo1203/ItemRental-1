@@ -11,14 +11,14 @@ public class ItemSearch extends JFrame implements ActionListener {
     public static Item cleaner, battery, monitor;
 
     static {
-        cleaner = new Item("001", "청소기", 20230520, true,
-                20230628, "가전제품", 20000, 0);
+        cleaner = new Item("001", "청소기", 20231225, true,
+                20230601, "가전제품", 20000, 0);
 
-        battery = new Item("002", "보조 배터리", 20230531, true,
-                20241225, "전자제품", 3000, 0);
+        battery = new Item("002", "보조 배터리", 20231121, true,
+                20230601, "전자제품", 3000, 0);
 
-        monitor = new Item("003", "모니터", 20231225, true,
-                20240302, "전자제품", 50000, 0);
+        monitor = new Item("003", "모니터", 20240505, true,
+                20230601, "전자제품", 50000, 0);
     }
 
     public ItemSearch(){

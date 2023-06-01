@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -177,20 +175,20 @@ public class LoginManagement extends JFrame implements ActionListener {
     public static void showUserList(){
         JFrame frame = new JFrame();
         JPanel mainPanel = new JPanel();
-        JPanel userPanel = new JPanel();
 
         frame.setTitle("사용자 목록 조회");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(600, 300);
         frame.setLocationRelativeTo(null);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         mainPanel.removeAll();
-        userPanel.removeAll();
+
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         for(User user : userList){
             JLabel nameLabel, idLabel;
             JButton userInformationButton, userAccountManagementButton;
+            JPanel userPanel = new JPanel();
 
             userPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -219,13 +217,13 @@ public class LoginManagement extends JFrame implements ActionListener {
                 JLabel classifyLabel = new JLabel("구분: " + user.getClassify());
                 userDetailsPanel.add(classifyLabel);
 
-                JLabel idLabel2 = new JLabel("ID: " + String.valueOf(user.getId()));
+                JLabel idLabel2 = new JLabel("ID: " + user.getId());
                 userDetailsPanel.add(idLabel2);
 
                 JLabel nameLabel2 = new JLabel("이름: " + user.getName());
                 userDetailsPanel.add(nameLabel2);
 
-                JLabel ageLabel = new JLabel("나이: " + String.valueOf(user.getAge()));
+                JLabel ageLabel = new JLabel("나이: " + user.getAge());
                 userDetailsPanel.add(ageLabel);
 
                 JLabel genderLabel = new JLabel("성별: " + user.getGender());
@@ -235,6 +233,18 @@ public class LoginManagement extends JFrame implements ActionListener {
                 userDetailsPanel.add(phoneLabel);
 
                 JOptionPane.showMessageDialog(frame, userDetailsPanel, "사용자 정보", JOptionPane.PLAIN_MESSAGE);
+            });
+
+            userAccountManagementButton.addActionListener(e -> {
+                int choice = JOptionPane.showConfirmDialog(frame, "사용자 계정을 삭제하시겠습니까?", "계정 삭제", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    user.deleteAccount();
+                    JOptionPane.showMessageDialog(frame, "사용자 계정이 삭제되었습니다.", "계정 삭제 완료", JOptionPane.INFORMATION_MESSAGE);
+                    mainPanel.remove(userPanel);
+                    frame.revalidate();
+                    frame.repaint();
+                    writeNewUserData();
+                }
             });
         }
         frame.add(mainPanel);
@@ -263,7 +273,6 @@ public class LoginManagement extends JFrame implements ActionListener {
     private static void writeNewUserData() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/resources/userList.txt"))) {
 
-            // 새로운 회원 데이터 쓰기
             for (User user : userList) {
                 String userData = user.toString();
                 bw.write(userData);

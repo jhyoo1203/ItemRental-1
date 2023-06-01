@@ -104,7 +104,31 @@ public class SystemMain extends JFrame implements ActionListener {
             new UpdateUsers(this.user);
         }
         else if(e.getSource() == informationBtn) {
+            JPanel userDetailsPanel = new JPanel();
+            userDetailsPanel.setLayout(new BoxLayout(userDetailsPanel, BoxLayout.Y_AXIS));
 
+            JLabel classifyLabel = new JLabel("구분: " + user.getClassify());
+            userDetailsPanel.add(classifyLabel);
+
+            JLabel nameLabel = new JLabel("이름: " + user.getName());
+            userDetailsPanel.add(nameLabel);
+
+            JLabel idLabel = new JLabel("ID: " + user.getId());
+            userDetailsPanel.add(idLabel);
+
+            JLabel passwordLabel = new JLabel("PW: " + user.getPassword());
+            userDetailsPanel.add(passwordLabel);
+
+            JLabel ageLabel = new JLabel("나이: " + user.getAge());
+            userDetailsPanel.add(ageLabel);
+
+            JLabel genderLabel = new JLabel("성별: " + user.getGender());
+            userDetailsPanel.add(genderLabel);
+
+            JLabel phoneLabel = new JLabel("전화번호: " + user.getPhoneNumber());
+            userDetailsPanel.add(phoneLabel);
+
+            JOptionPane.showMessageDialog(this, userDetailsPanel, "내 정보 보기", JOptionPane.PLAIN_MESSAGE);
         }
         else if(e.getSource() == logoutBtn) {
             int choice = JOptionPane.showOptionDialog(null,
@@ -176,12 +200,8 @@ public class SystemMain extends JFrame implements ActionListener {
         JButton userListSearchBtn = new JButton("사용자 목록 조회");
         userListSearchBtn.setBounds(120, 100, 150, 50);
 
-        JButton userAccountManagementBtn = new JButton("사용자 계정 관리");
-        userAccountManagementBtn.setBounds(120, 150, 150, 50);
-
         frame.add(rentalRequestManagementBtn);
         frame.add(userListSearchBtn);
-        frame.add(userAccountManagementBtn);
 
         rentalRequestManagementBtn.addActionListener(e -> {
             RentalRequestManagement.showRentalRequest();
@@ -189,10 +209,6 @@ public class SystemMain extends JFrame implements ActionListener {
 
         userListSearchBtn.addActionListener(e -> {
             LoginManagement.showUserList();
-        });
-
-        userAccountManagementBtn.addActionListener(e -> {
-            LoginManagement.userAccountManagement();
         });
 
         frame.setLayout(null);

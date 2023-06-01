@@ -29,7 +29,7 @@ public class SystemMain extends JFrame implements ActionListener {
         consumerBtn = new JButton("소비자");
         providerBtn = new JButton("제공자");
         informationBtn = new JButton("내 정보 보기");
-        updateBtn = new JButton("회원 정보 수정");
+        updateBtn = new JButton("회원정보 수정");
         logoutBtn = new JButton("로그아웃");
 
         btnPanel = new JPanel();
@@ -101,7 +101,7 @@ public class SystemMain extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == updateBtn) {
-            new UpdateUsers(userId);
+            new UpdateUsers(this.user);
         }
         else if(e.getSource() == informationBtn) {
 

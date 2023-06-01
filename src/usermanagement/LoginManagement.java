@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -188,7 +190,7 @@ public class LoginManagement extends JFrame implements ActionListener {
 
         for(User user : userList){
             JLabel nameLabel, idLabel;
-            JButton userInformationButton;
+            JButton userInformationButton, userAccountManagementButton;
 
             userPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -203,6 +205,10 @@ public class LoginManagement extends JFrame implements ActionListener {
             userInformationButton = new JButton("상세보기");
             userInformationButton.setPreferredSize(new Dimension(100, 30));
             userPanel.add(userInformationButton);
+
+            userAccountManagementButton = new JButton("계정관리");
+            userAccountManagementButton.setPreferredSize(new Dimension(100, 30));
+            userPanel.add(userAccountManagementButton);
 
             mainPanel.add(userPanel);
 
@@ -241,5 +247,30 @@ public class LoginManagement extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
+    }
+
+    public static void updateUserData(User user) {
+        for (int i = 0; i < userList.size(); i++) {
+            User currentUser = userList.get(i);
+            if (currentUser.getId() == user.getId()) {
+                userList.set(i, user);
+                break;
+            }
+        }
+        writeNewUserData();
+    }
+
+    private static void writeNewUserData() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/resources/userList.txt"))) {
+
+            // 새로운 회원 데이터 쓰기
+            for (User user : userList) {
+                String userData = user.toString();
+                bw.write(userData);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

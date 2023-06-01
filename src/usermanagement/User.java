@@ -52,6 +52,18 @@ public class User {
         return phoneNumber;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
         return String.format(classify + "," + id + "," + password + "," + name + "," + age + "," + gender + "," + phoneNumber);

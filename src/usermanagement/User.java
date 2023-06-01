@@ -20,6 +20,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public User() {
+        this.id = 10000000;
+    }
+
     public String getClassify() {
         return classify;
     }

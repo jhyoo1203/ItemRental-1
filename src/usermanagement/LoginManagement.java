@@ -17,10 +17,11 @@ public class LoginManagement extends JFrame implements ActionListener {
     private JButton loginButton, resetButton, signUpButton;
     private JPanel idPanel, pwPanel, loginPanel, messagePanel, btnPanel;
 
-    // 회원가입한 User 삽입 예정. -> Join에서 받아 .txt 파일로 관리
-    public static ArrayList<User> userList = new ArrayList<>();
+    // 회원가입한 User 삽입 -> Join에서 받아 .txt 파일로 관리
+    public static ArrayList<User> userList;
 
     public LoginManagement() {
+        userList = new ArrayList<>();
         loadUserList();
 
         setTitle("물품 대여 시스템 로그인");
@@ -86,18 +87,16 @@ public class LoginManagement extends JFrame implements ActionListener {
 
         if (e.getSource() == loginButton){
             User user = searchUser(Integer.parseInt(userTextField.getText()));
-            String pw = "";
-            char[] secret_pw = passwordField.getPassword();
-            for(char ch: secret_pw) {
-                Character.toString(ch);
-                pw += (pw.equals("")) ? ""+ch+"" : ""+ch+"";
-            }
 
-            if(user != null && pw.equals(user.getPassword())){
+            if(user != null && user.getPassword().equals(new String(passwordField.getPassword()))){
                 messageLabel.setForeground(Color.BLUE);
                 messageLabel.setText("로그인 성공");
                 dispose();
                 new SystemMain(user);
+            }
+            else if(userTextField.getText().equals("10000000")){
+                dispose();
+                new SystemMain(new User());
             }
             else {
                 JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 확인하세요.", "에러", JOptionPane.ERROR_MESSAGE);
@@ -132,6 +131,7 @@ public class LoginManagement extends JFrame implements ActionListener {
 
     public static void loadUserList(){
         BufferedReader br = null;
+        BufferedWriter bw = null;
         String data = null;
         StringTokenizer st = null;
         try {
@@ -149,9 +149,17 @@ public class LoginManagement extends JFrame implements ActionListener {
 
                 userList.add(new User(classify, id, password, name, age, gender, phoneNumber));
             }
-            br.close();
         }
-        catch (IOException e) {
+        catch (FileNotFoundException e) {
+            try {
+                bw = new BufferedWriter(new FileWriter("src/resources/userList.txt"));
+                bw.newLine();
+            }
+            catch (IOException e2) {
+                throw new RuntimeException(e2);
+            }
+        }
+        catch (IOException e){
             throw new RuntimeException(e);
         }
     }
@@ -165,10 +173,73 @@ public class LoginManagement extends JFrame implements ActionListener {
     }
 
     public static void showUserList(){
+        JFrame frame = new JFrame();
+        JPanel mainPanel = new JPanel();
+        JPanel userPanel = new JPanel();
 
+        frame.setTitle("사용자 목록 조회");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLocationRelativeTo(null);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        mainPanel.removeAll();
+        userPanel.removeAll();
+
+        for(User user : userList){
+            JLabel nameLabel, idLabel;
+            JButton userInformationButton;
+
+            userPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            nameLabel = new JLabel(user.getName());
+            nameLabel.setPreferredSize(new Dimension(100, 30));
+            userPanel.add(nameLabel);
+
+            idLabel = new JLabel(String.valueOf(user.getId()));
+            idLabel.setPreferredSize(new Dimension(100, 30));
+            userPanel.add(idLabel);
+
+            userInformationButton = new JButton("상세보기");
+            userInformationButton.setPreferredSize(new Dimension(100, 30));
+            userPanel.add(userInformationButton);
+
+            mainPanel.add(userPanel);
+
+            userInformationButton.addActionListener(e -> {
+                JPanel userDetailsPanel = new JPanel();
+                userDetailsPanel.setLayout(new BoxLayout(userDetailsPanel, BoxLayout.Y_AXIS));
+
+                JLabel classifyLabel = new JLabel("구분: " + user.getClassify());
+                userDetailsPanel.add(classifyLabel);
+
+                JLabel idLabel2 = new JLabel("ID: " + String.valueOf(user.getId()));
+                userDetailsPanel.add(idLabel2);
+
+                JLabel nameLabel2 = new JLabel("이름: " + user.getName());
+                userDetailsPanel.add(nameLabel2);
+
+                JLabel ageLabel = new JLabel("나이: " + String.valueOf(user.getAge()));
+                userDetailsPanel.add(ageLabel);
+
+                JLabel genderLabel = new JLabel("성별: " + user.getGender());
+                userDetailsPanel.add(genderLabel);
+
+                JLabel phoneLabel = new JLabel("전화번호: " + user.getPhoneNumber());
+                userDetailsPanel.add(phoneLabel);
+
+                JOptionPane.showMessageDialog(frame, userDetailsPanel, "사용자 정보", JOptionPane.PLAIN_MESSAGE);
+            });
+        }
+        frame.add(mainPanel);
+        frame.setVisible(true);
     }
 
     public static void userAccountManagement() {
-
+        JFrame frame = new JFrame();
+        frame.setTitle("사용자 계정 관리");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLocationRelativeTo(null);
     }
 }

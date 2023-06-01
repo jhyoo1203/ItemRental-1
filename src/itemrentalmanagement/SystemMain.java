@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class SystemMain extends JFrame implements ActionListener {
     private User user;
-    private JButton intermediaryBtn, consumerBtn, providerBtn, logoutBtn, updateBtn;
+    private JButton intermediaryBtn, consumerBtn, providerBtn, logoutBtn, updateBtn, informationBtn;
     private JPanel btnPanel, userPanel, blankPanel;
 
     // showSystemMain() 대체
@@ -28,6 +28,7 @@ public class SystemMain extends JFrame implements ActionListener {
         intermediaryBtn = new JButton("중개자");
         consumerBtn = new JButton("소비자");
         providerBtn = new JButton("제공자");
+        informationBtn = new JButton("내 정보 보기");
         updateBtn = new JButton("회원 정보 수정");
         logoutBtn = new JButton("로그아웃");
 
@@ -45,6 +46,7 @@ public class SystemMain extends JFrame implements ActionListener {
         
         userPanel = new JPanel();
         userPanel.setLayout(new FlowLayout(1, 20, 0));
+        userPanel.add(informationBtn);
         userPanel.add(updateBtn);
         userPanel.add(logoutBtn);
         logoutBtn.setPreferredSize(new Dimension(100, 30));
@@ -60,6 +62,7 @@ public class SystemMain extends JFrame implements ActionListener {
         intermediaryBtn.addActionListener(this);
         consumerBtn.addActionListener(this);
         providerBtn.addActionListener(this);
+        informationBtn.addActionListener(this);
         updateBtn.addActionListener(this);
         logoutBtn.addActionListener(this);
 
@@ -71,9 +74,9 @@ public class SystemMain extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed (ActionEvent e){
+    public void actionPerformed (ActionEvent e) {
         int userId = user.getId();
-        if(e.getSource() == intermediaryBtn){
+        if(e.getSource() == intermediaryBtn) {
             if(userId == 10000000){
                 showIntermediaryScreen();
             }
@@ -81,15 +84,15 @@ public class SystemMain extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "자격이 유효하지 않습니다.", "에러", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else if(e.getSource() == consumerBtn){
-            if(userId >= 20000000 && user.getId() < 30000000){
+        else if(e.getSource() == consumerBtn) {
+            if(userId >= 20000000 && userId < 30000000){
                 showConsumerScreen();
             }
             else{
                 JOptionPane.showMessageDialog(null, "자격이 유효하지 않습니다.", "에러", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else if(e.getSource() == providerBtn){
+        else if(e.getSource() == providerBtn) {
             if(userId >= 30000000){
                 showProviderScreen();
             }
@@ -97,10 +100,13 @@ public class SystemMain extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "자격이 유효하지 않습니다.", "에러", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else if(e.getSource() == updateBtn){
+        else if(e.getSource() == updateBtn) {
             new UpdateUsers(userId);
         }
-        else{
+        else if(e.getSource() == informationBtn) {
+
+        }
+        else if(e.getSource() == logoutBtn) {
             int choice = JOptionPane.showOptionDialog(null,
                     "로그아웃 하시겠습니까?", "확인",
                     JOptionPane.YES_NO_OPTION,
@@ -111,7 +117,6 @@ public class SystemMain extends JFrame implements ActionListener {
                 dispose();
                 new LoginManagement();
             }
-
         }
     }
 
@@ -193,5 +198,4 @@ public class SystemMain extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
     }
-
 }

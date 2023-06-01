@@ -183,24 +183,21 @@ public class UpdateUsers {
             }
         });
 
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == updateButton) {
-                    String classify = consumerCheckBox.isSelected() ? "소비자" : "제공자";
-                    int id = Integer.parseInt(idTextField.getText());
-                    String password = new String(passwordField.getPassword());
-                    String name = nameTextField.getText();
-                    int age = Integer.parseInt(ageTextField.getText());
-                    String gender = maleCheckBox.isSelected() ? "남자" : "여자";
-                    String phoneNumber = phoneNumberTextField.getText();
+        updateButton.addActionListener(e -> {
+            if (e.getSource() == updateButton) {
+                String classify = consumerCheckBox.isSelected() ? "소비자" : "제공자";
+                int id = Integer.parseInt(idTextField.getText());
+                String password = new String(passwordField.getPassword());
+                String name = nameTextField.getText();
+                int age = Integer.parseInt(ageTextField.getText());
+                String gender = maleCheckBox.isSelected() ? "남자" : "여자";
+                String phoneNumber = phoneNumberTextField.getText();
 
-                    User user = new User(classify, id, password, name, age, gender, phoneNumber);
-                    LoginManagement.userList.add(user);
-                    updateUser(Integer.toString(userId), user);
+                User user = new User(classify, id, password, name, age, gender, phoneNumber);
+                LoginManagement.userList.add(user);
+                updateUser(Integer.toString(userId), user);
 
-                    JOptionPane.showMessageDialog(null, "회원 정보 수정이 완료되었습니다.", "확인", JOptionPane.PLAIN_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(null, "회원 정보 수정이 완료되었습니다.", "확인", JOptionPane.PLAIN_MESSAGE);
             }
         });
     }

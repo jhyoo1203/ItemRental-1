@@ -251,14 +251,6 @@ public class LoginManagement extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-    public static void userAccountManagement() {
-        JFrame frame = new JFrame();
-        frame.setTitle("사용자 계정 관리");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLocationRelativeTo(null);
-    }
-
     public static void updateUserData(User user) {
         for (int i = 0; i < userList.size(); i++) {
             User currentUser = userList.get(i);
